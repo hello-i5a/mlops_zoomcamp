@@ -24,7 +24,7 @@ The CRISP-DM, which stands for Cross-Industry Standard Process for Data Mining, 
 **Using MLflow**: Allows users to log experiments, save models as artifacts, and track parameters and metrics throughout the lifecycle of model development.
 
 - Model Logging: Logs metrics, parameters, and models for future retrieval and use.
-  - Two methods: logging a model as an artifact and logging it as an MLflow model.
+  - Two methods: logging a model as an artifact and logging it as an MLflow model (i.e. `log_model` method).
   - MLflow model has more advantages as it includes dependencies and environment specifications, which is crucial for deployment and reproducibility.
 - Framework Support: Supports multiple frameworks for saving and loading models in various formats.
 - Predictive Capabilities: Facilitates making accurate predictions with properly logged and stored models.
@@ -62,3 +62,75 @@ The CRISP-DM, which stands for Cross-Industry Standard Process for Data Mining, 
 - Logging: MLflow tracks experiments, models, and parameters effectively.
 - Registration: Demonstrates how to register and transition model versions smoothly.
 - Other commands: Retrieving performance metrics, and transitioning models between stages.
+
+## Sample MLflow Code
+
+### Experiment Tracking
+
+Core concepts:
+
+- Runs
+- Parameters (`log_param`)
+- Metrics (`log_metric`)
+- Artifacts (`log_artifact`)
+
+```python
+import mlflow
+
+with mlflow.start_run():
+    mlflow.log_param("learning_rate", 0.01)
+    mlflow.log_metric("accuracy", 0.92)
+    mlflow.log_artifact("outputs/model.pkl")
+```
+
+### Model Management
+
+Core concepts:
+
+- Model logging (`log_model`)
+- Model loading (`load_model`)
+- Framework support: `sklearn`, `xgboost`, `pytorch`, `pyfunc`, etc.
+
+```python
+import mlflow.sklearn
+
+# Log model
+mlflow.sklearn.log_model(model, artifact_path="model")
+
+# Load model later
+model_uri = "runs:/<run_id>/model"
+loaded_model = mlflow.sklearn.load_model(model_uri)
+```
+
+### Model Registry
+
+Core concepts:
+
+- Registered models
+- Model versions
+- Stages: `None`, `Staging`, `Production`, `Archived`
+- Use of `MlflowClient` server, a RESTful tracking server that acts as a centralized backend
+  - Backends: 1) Tracking: Local files, SQL databases and 2) Artifact Store: S3, Azure Blob, GCS, etc.
+
+```python
+from mlflow import MlflowClient
+
+client = MlflowClient()
+
+# Register a new model
+client.create_registered_model("my_model")
+
+# Create model version
+client.create_model_version(
+    name="my_model",
+    source="runs:/<run_id>/model",
+    run_id="<run_id>"
+)
+
+# Transition version to Production
+client.transition_model_version_stage(
+    name="my_model",
+    version=1,
+    stage="Production"
+)
+```
