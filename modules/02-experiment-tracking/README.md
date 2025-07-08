@@ -115,6 +115,7 @@ Core concepts:
 ```python
 from mlflow import MlflowClient
 
+mlflow.set_tracking_uri("http://<tracking-server-ip>:5000")
 client = MlflowClient()
 
 # Register a new model
