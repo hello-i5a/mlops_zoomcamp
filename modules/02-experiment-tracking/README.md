@@ -11,7 +11,24 @@ _How and why saving models differs from traditional machine learning (ML) and de
 
 In short: when saving models think from a **workflow and deployment perspective**.
 
-## Experiment Tracking
+## Understanding Machine Learning Lifecycle
+
+![Machine Learning Lifecycle Architecture Diagram](ml-lifecycle.png "ML Lifecycle")
+
+The ML lifecycle includes stages such as data collection, model training, evaluation, deployment, and continuous monitoring — structured approach to effectively manage machine learning models.
+
+The CRISP-DM, which stands for Cross-Industry Standard Process for Data Mining, is a widely adopted framework that outlines the steps involved in a data analytics, data science or machine learning project.
+
+## Model Management
+
+**Using MLflow**: Allows users to log experiments, save models as artifacts, and track parameters and metrics throughout the lifecycle of model development.
+
+- Model Logging: Logs metrics, parameters, and models for future retrieval and use.
+  - Two methods: logging a model as an artifact and logging it as an MLflow model.
+  - MLflow model has more advantages as it includes dependencies and environment specifications, which is crucial for deployment and reproducibility.
+- Framework Support: Supports multiple frameworks for saving and loading models in various formats.
+- Predictive Capabilities: Facilitates making accurate predictions with properly logged and stored models.
+  - Load models as either Python functions or specific framework objects.
 
 ## Model Registry
 
