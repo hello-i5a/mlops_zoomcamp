@@ -135,3 +135,17 @@ client.transition_model_version_stage(
     stage="Production"
 )
 ```
+
+## MLflow: Issues and Limitations
+
+_Issues_
+
+- Security: Shared instances may expose sensitive experiments and models to unauthorized access.
+- Scalability: High demand can overwhelm a single server, complicating tracking experiments.
+- Isolation: Conflicting experiment names between teams can lead to confusion and errors.
+
+_Limitations_
+
+- Authentication: Open-source MLflow has no user management features affecting secured access.
+- Data Versioning: MLflow lacks built-in options for dataset versioning affecting reproducibility.
+- Monitoring: Limited capabilities for monitoring model performance or data distribution exist.
