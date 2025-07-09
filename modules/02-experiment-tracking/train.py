@@ -20,14 +20,19 @@ def load_pickle(filename: str):
     help="Location where the processed NYC taxi trip data was saved"
 )
 def run_train(data_path: str):
+    # tracking server, comes handy for remote server
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
-    mlflow.sklearn.autolog()
+    mlflow.sklearn.autolog()  # automates the following:
+    # logging model inputs/outputs
+    # saving the model
+    # tracking hyperparameters
+    # logging training metrics
 
     X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
     X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
 
-    with mlflow.start_run():
+    with mlflow.start_run():  # track experiments
         rf = RandomForestRegressor(max_depth=10, random_state=0)
         rf.fit(X_train, y_train)
 
