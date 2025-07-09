@@ -1,0 +1,35 @@
+#  MLflow SQLite DB file
+**/mlflow.db
+
+# MLflow experiment logs
+**/mlruns/
+
+# MLflow artifacts directories
+**/artifacts/
+
+# Jupyter Notebook checkpoints
+**/.ipynb_checkpoints/
+
+# VSCode settings
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+# .env
+# .venv/
+# *.env
+
+# Data files
+# *.csv
+# *.parquet
+# *.pkl
+# *.joblib
+# *.h5
+
+# Model files
+# *.onnx
+# *.pt
+# *.pb
