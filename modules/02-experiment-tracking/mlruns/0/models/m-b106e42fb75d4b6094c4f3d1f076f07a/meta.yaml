@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/isabe/Documents/GitHub/mlops_zoomcamp/modules/02-experiment-tracking/mlruns/0/models/m-b106e42fb75d4b6094c4f3d1f076f07a/artifacts
+creation_timestamp: 1752031867787
+experiment_id: '0'
+last_updated_timestamp: 1752031880828
+model_id: m-b106e42fb75d4b6094c4f3d1f076f07a
+model_type: null
+name: model
+source_run_id: dea07a3a01a8434fa6af6a537f1792ed
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/isabe/Documents/GitHub/mlops_zoomcamp/modules/02-experiment-tracking/mlruns/0/dea07a3a01a8434fa6af6a537f1792ed/artifacts
+end_time: 1752031889439
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: dea07a3a01a8434fa6af6a537f1792ed
+run_name: omniscient-toad-173
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752031844889
+status: 3
+tags: []
+user_id: Isabel
