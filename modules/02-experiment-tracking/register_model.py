@@ -13,9 +13,10 @@ EXPERIMENT_NAME = "random-forest-best-models"
 RF_PARAMS = ['max_depth', 'n_estimators',
              'min_samples_split', 'min_samples_leaf', 'random_state']
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow.set_tracking_uri("http://127.0.0.1:5000")  # connect to tracking server
+# set experiment name where retrained models will be logged
 mlflow.set_experiment(EXPERIMENT_NAME)
-mlflow.sklearn.autolog()
+mlflow.sklearn.autolog()  # autologging
 
 
 def load_pickle(filename):
@@ -28,7 +29,7 @@ def train_and_log_model(data_path, params):
     X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
     X_test, y_test = load_pickle(os.path.join(data_path, "test.pkl"))
 
-    with mlflow.start_run():
+    with mlflow.start_run():  # start a tracked session
         new_params = {}
         for param in RF_PARAMS:
             new_params[param] = int(params[param])
@@ -57,9 +58,9 @@ def train_and_log_model(data_path, params):
 )
 def run_register_model(data_path: str, top_n: int):
 
-    client = MlflowClient()
+    client = MlflowClient()  # use MlflowClient to access past experiment runs
 
-    # Retrieve the top_n model runs and log the models
+    # retrieve the top_n model runs and log the models
     experiment = client.get_experiment_by_name(HPO_EXPERIMENT_NAME)
     runs = client.search_runs(
         experiment_ids=experiment.experiment_id,
@@ -70,12 +71,8 @@ def run_register_model(data_path: str, top_n: int):
     for run in runs:
         train_and_log_model(data_path=data_path, params=run.data.params)
 
-    # Select the model with the lowest test RMSE
+    # select the model with the lowest test RMSE
     experiment = client.get_experiment_by_name(EXPERIMENT_NAME)
-    # best_run = client.search_runs( ...  )[0]
-
-    # Register the best model
-    # mlflow.register_model( ... )
 
     best_run = client.search_runs(
         experiment_ids=[experiment.experiment_id],
@@ -90,6 +87,7 @@ def run_register_model(data_path: str, top_n: int):
     model_uri = f"runs:/{best_run.info.run_id}/model"
     model_name = "random-forest-regressor-nj-2023"
 
+    # registers the best model
     mlflow.register_model(model_uri=model_uri, name=model_name)
     print(f"Model registered: {model_name}")
 

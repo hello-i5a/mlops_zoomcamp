@@ -32,7 +32,7 @@ def run_train(data_path: str):
     X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
     X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
 
-    with mlflow.start_run():  # track experiments
+    with mlflow.start_run():  # track experiments, everything is logged within this block
         rf = RandomForestRegressor(max_depth=10, random_state=0)
         rf.fit(X_train, y_train)
 
